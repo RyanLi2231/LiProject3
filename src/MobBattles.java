@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MobBattles {
     // Variables for the Mobs // mN = Mob Name | hp = Hit Points |
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
@@ -9,7 +11,7 @@ public class MobBattles {
     private int ad;
 
     // The list of Mobs && Moves // HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
-    private String[][] mobs = {{"Zombie", "100", "200", "20", "30", "1.5"}};
+    private String[][] mobs = {{"Zombie", "100", "200", "20", "30", "2"}};
     private String[][] moves = {{}};
 
     public MobBattles(int mobNum) {
@@ -34,14 +36,17 @@ public class MobBattles {
         }
     }
     public void printMobStats() {
-        String[][] statNames = {{"Hp: ", Integer.toString(hp)}, {"Mp: "}, {"Defense: "}, {"Speed: "}, {"Attack: "}};
+        String[][] statNames = {{"Hp: " + hp}, {"Mp: "}, {"Defense: "}, {"Speed: "}, {"Attack: "}};
         System.out.println(mN);
         for (int i = 0; i < statNames.length; i++) {
-            int count = 20;
-            System.out.print("|" + statNames[i] + );
+            int count = 10;
+            System.out.print("|" + Arrays.toString(statNames[i]) + "|");
+            count -= statNames.length - 2;
             for(int j = 1; j <= count; j++) {
-
+                System.out.print(" ");
             }
+            i++;
+            System.out.println("|" + Arrays.toString(statNames[i]) + "|");
         }
     }
 }

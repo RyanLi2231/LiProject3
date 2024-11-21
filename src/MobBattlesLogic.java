@@ -4,6 +4,8 @@ public class MobBattlesLogic {
     Scanner scan = new Scanner(System.in);
     boolean repeat = false;
     MobBattles infoObj = new MobBattles(1);
+    MobBattles play;
+
     public MobBattlesLogic() {}
 
     public void start() {
@@ -14,7 +16,7 @@ public class MobBattlesLogic {
     }
 
     public void intro() {
-        System.out.print("Please pick your mob using a number (ex: 1): ");
+        System.out.println("Please pick your mob using a number (ex: 1): ");
         infoObj.printMobNames();
         int mobNum = scan.nextInt();
         while (mobNum < 1 && mobNum >= infoObj.getMobs().length) {
@@ -22,7 +24,7 @@ public class MobBattlesLogic {
             System.out.println("Pick a valid mob");
             mobNum = scan.nextInt();
         }
-        MobBattles play = new MobBattles(mobNum);
+        play = new MobBattles(mobNum);
     }
 
     public void mainMenu() {
@@ -34,16 +36,8 @@ public class MobBattlesLogic {
 
     public void decider() {
         int choice = scan.nextInt();
-        if (choice == 1) {
-
-        } else if (choice == 2) {
-
-        } else if (choice == 3) {
-
-        } else if (choice == 4) {
-
-        } else {
-
+        if (choice == 2) {
+            play.printMobStats();
         }
     }
 }
