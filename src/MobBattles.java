@@ -1,20 +1,29 @@
-import java.util.Arrays;
-
 public class MobBattles {
     // Variables for the Mobs // mN = Mob Name | hp = Hit Points |
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
     private String mN;
+    private int lvl = 1;
     private int hp;
     private int mp;
     private int df;
     private int sd;
     private int ad;
 
-    // The list of Mobs && Moves // HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
+    // The list of Mobs // HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
     private String[][] mobs = {{"Zombie", "100", "200", "20", "30", "2"}};
-    private String[][] moves = {{}};
+    // List of moves // Name | MP cost | attack type
+    private String[][][] moves = {{{"Strike", "0", "single"}, {"Spit", "20", "gradual"}, {"Lunge", "30", "heavy"}, {"Taunt", "10", "accDown"}}};
 
     public MobBattles(int mobNum) {
+        mN = mobs[mobNum - 1][0];
+        hp = Integer.parseInt(mobs[mobNum - 1][1]);
+        mp = Integer.parseInt(mobs[mobNum - 1][2]);
+        df = Integer.parseInt(mobs[mobNum - 1][3]);
+        sd = Integer.parseInt(mobs[mobNum - 1][4]);
+        ad = Integer.parseInt(mobs[mobNum - 1][5]);
+    }
+    public MobBattles() {
+        int mobNum = (int) (Math.random() * mobs.length);
         mN = mobs[mobNum - 1][0];
         hp = Integer.parseInt(mobs[mobNum - 1][1]);
         mp = Integer.parseInt(mobs[mobNum - 1][2]);
@@ -35,18 +44,27 @@ public class MobBattles {
             System.out.println(i + 1 + ". " + mobs[i][0]);
         }
     }
+    public void battle() {
+
+    }
     public void printMobStats() {
-        String[][] statNames = {{"Hp: " + hp}, {"Mp: "}, {"Defense: "}, {"Speed: "}, {"Attack: "}};
+        String[] statNames = {"Hp: " + hp, "Mp: " + mp, "Defense: " + df, "Speed: " + sd, "Attack: " + ad};
         System.out.println(mN);
         for (int i = 0; i < statNames.length; i++) {
-            int count = 10;
-            System.out.print("|" + Arrays.toString(statNames[i]) + "|");
-            count -= statNames.length - 2;
+            int count = 20;
+            System.out.print("|" + statNames[i] + "|");
+            count -= statNames[i].length() - 2;
             for(int j = 1; j <= count; j++) {
                 System.out.print(" ");
             }
             i++;
-            System.out.println("|" + Arrays.toString(statNames[i]) + "|");
+            if (i < statNames.length) {
+                System.out.println("|" + statNames[i] + "|");
+            }
+
         }
     }
+
+    //Attack Types
+    public void
 }

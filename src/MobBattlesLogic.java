@@ -28,14 +28,17 @@ public class MobBattlesLogic {
     }
 
     public void mainMenu() {
-        System.out.println("1. Battle (Fight against another mob)");
+        System.out.println("1. Battle (Fight against another person (ai))");
         System.out.println("2. Stats  (Look at your mobs' statistics)");
-        System.out.println("3. Mobs   (Buy or look at your mobs' moves)" );
+        System.out.println("3. Mobs   (View all mobs)" );
         System.out.println("4. End    (End your game)");
     }
 
     public void decider() {
         int choice = scan.nextInt();
+        if (choice == 1) {
+            play.
+        }
         if (choice == 2) {
             play.printMobStats();
         }
