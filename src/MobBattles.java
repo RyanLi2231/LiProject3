@@ -11,8 +11,10 @@ public class MobBattles {
 
     // The list of Mobs // HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
     private String[][] mobs = {{"Zombie", "100", "200", "20", "30", "2"}};
-    // List of moves // Name | MP cost | attack type
+    // List of moves // Name | MP cost | attack type /| accuracy Down
     private String[][][] moves = {{{"Strike", "0", "single"}, {"Spit", "20", "gradual"}, {"Lunge", "30", "heavy"}, {"Taunt", "10", "accDown"}}};
+    // List of People you can encounter
+    private String[] people = {"Sam", "Tom", "Timmy", "Jill", "Max", "Toby", "Samantha", "Jerry", "Sally", "Mary", "Luke", "Brock", "Jake"};
 
     public MobBattles(int mobNum) {
         mN = mobs[mobNum - 1][0];
@@ -45,10 +47,14 @@ public class MobBattles {
         }
     }
     public void battle() {
+        String battler = people[(int) (Math.random() * people.length)] ;
+        System.out.println("You have entered the battle arena!");
+        System.out.println("You will be facing " + battler + "!");
 
+        System.out.println(battler + "'s mob is a");
     }
     public void printMobStats() {
-        String[] statNames = {"Hp: " + hp, "Mp: " + mp, "Defense: " + df, "Speed: " + sd, "Attack: " + ad};
+        String[] statNames = {"Level: " + lvl, "Hp: " + hp, "Mp: " + mp, "Defense: " + df, "Speed: " + sd, "Attack: " + ad};
         System.out.println(mN);
         for (int i = 0; i < statNames.length; i++) {
             int count = 20;
@@ -64,7 +70,10 @@ public class MobBattles {
 
         }
     }
+    // Opponent Creator
 
     //Attack Types
-    public void
+    public void single() {
+
+    }
 }

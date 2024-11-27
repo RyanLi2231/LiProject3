@@ -37,7 +37,7 @@ public class MobBattlesLogic {
     public void decider() {
         int choice = scan.nextInt();
         if (choice == 1) {
-            play.
+            play.battle();
         }
         if (choice == 2) {
             play.printMobStats();
