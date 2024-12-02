@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class MobBattlesLogic {
-    Scanner scan = new Scanner(System.in);
-    boolean repeat = false;
-    MobBattles infoObj = new MobBattles(1);
-    MobBattles play;
+    private Scanner scan = new Scanner(System.in);
+    private boolean repeat = false;
+    private MobBattles infoObj = new MobBattles(1);
+    private MobBattles play;
 
     public MobBattlesLogic() {}
 
@@ -30,6 +30,7 @@ public class MobBattlesLogic {
     public void mainMenu() {
         System.out.println("1. Battle (Fight against another person (ai))");
         System.out.println("2. Stats  (Look at your mobs' statistics)");
+        System.out.println("3. Distribute Status Points");
         System.out.println("3. Mobs   (View all mobs)" );
         System.out.println("4. End    (End your game)");
     }
