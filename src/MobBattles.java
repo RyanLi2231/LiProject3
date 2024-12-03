@@ -96,7 +96,7 @@ public class MobBattles {
      * @param currentMP2 the current mp of the opponent's mob
      */
     public void battleTable(int currentHP, int currentMP, int currentHP2, int currentMP2) {
-
+        System.out.println("");
     }
 
     /** Prints the user's mob's stats */
