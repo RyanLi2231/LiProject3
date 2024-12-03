@@ -55,6 +55,8 @@ public class Player {
     public int getAd() {
         return ad;
     }
-
+    public String[][] getMoves() {
+        return moves;
+    }
     // Methods to increase stats based off levels
 }

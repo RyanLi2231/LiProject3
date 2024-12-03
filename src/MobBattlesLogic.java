@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MobBattlesLogic {
     private Scanner scan = new Scanner(System.in);
-    private boolean repeat = false;
+    private boolean repeat = true;
     private MobBattles infoObj = new MobBattles(1);
     private MobBattles play;
 
@@ -11,8 +11,10 @@ public class MobBattlesLogic {
     public void start() {
         System.out.println("Hello!! Welcome to Mob Battles!");
         intro();
-        mainMenu();
-        decider();
+        while (repeat) {
+            mainMenu();
+            decider();
+        }
     }
 
     public void intro() {
@@ -37,11 +39,14 @@ public class MobBattlesLogic {
 
     public void decider() {
         int choice = scan.nextInt();
+        scan.nextLine();
         if (choice == 1) {
             play.battle();
         }
         if (choice == 2) {
             play.printMobStats();
+            System.out.println("Press enter to continue");
+            String temp = scan.nextLine();
         }
     }
 }
