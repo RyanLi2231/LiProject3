@@ -33,16 +33,24 @@ public class MobBattles {
 
     // Getters / Setters
 
+    /**
+     *
+     * @return returns the array mobs for the use of the Player class
+     */
     public String[][] getMobs() {
         return mobs;
     }
 
     // Methods
+
+    /** prints the name of the mobs */
     public void printMobNames() {
         for (int i = 0; i < mobs.length; i++) {
             System.out.println(i + 1 + ". " + mobs[i][0]);
         }
     }
+
+    /** starts the battle with another player (ai) */
     public void battle() {
         String battler = people[(int) (Math.random() * people.length)] ;
         int mobNum = (int) (Math.random() * mobs.length);
@@ -61,6 +69,8 @@ public class MobBattles {
             break;
         }
     }
+
+    /** Prints the movies for the user's mobs so they can battle */
     public void battleMenu() {
         String[][] moves = player.getMoves();
         for (int i = 0; i < moves.length; i++) {
@@ -77,10 +87,19 @@ public class MobBattles {
 
         }
     }
-    public void battleTable() {
+
+    /**
+     * Prints the Hp & mp of the user's mob & the opponent's mob
+     * @param currentHP the current hp of the user's mob
+     * @param currentHP2 the current hp of the opponent's mob
+     * @param currentMP the current mp of the user's mob
+     * @param currentMP2 the current mp of the opponent's mob
+     */
+    public void battleTable(int currentHP, int currentMP, int currentHP2, int currentMP2) {
 
     }
 
+    /** Prints the user's mob's stats */
     public void printMobStats() {
         String[] statNames = {"Level: " + player.getLvl(), "Hp: " + player.getHp(), "Mp: " + player.getMp(), "Defense: " + player.getDf(), "Speed: " + player.getSd(), "Attack: " + player.getAd()};
         System.out.println(player.getmN());
@@ -100,19 +119,38 @@ public class MobBattles {
     }
 
     //Attack Types
+
+    /**
+     * Deals damage to the opposer
+     * @return returns the damage dealt
+     */
     public int single() {
         return 20 * (1 + (player.getAd() / 100));
     }
 
+    /**
+     * Deals heavy damage to the opposer
+     * @return returns the damage dealt
+     */
     public int heavy() {
         return 20 * (1 + (player.getAd() / 10));
     }
 
+    /**
+     * Deals damage overtime
+     * @return returns the damage dealt overtime
+     */
     public int gradual() {
         return 0;
     }
 
     // Damage Taken
+
+    /**
+     * Damage that's taken from the opposer by factoring the defense of the taker
+     * @param damage Damage that is taken from single or heavy damage
+     * @return returns the damage taken
+     */
     public int damageTaken(int damage) {
         int trueDamage = (int) (damage - (player.getDf() / 5));
         if (trueDamage < 0) {
