@@ -15,6 +15,7 @@ public class MobBattlesLogic {
             mainMenu();
             decider();
         }
+        System.out.println("Thank you for playing Mob Battles!!");
     }
 
     public void intro() {
@@ -33,20 +34,61 @@ public class MobBattlesLogic {
         System.out.println("1. Battle (Fight against another person (ai))");
         System.out.println("2. Stats  (Look at your mobs' statistics)");
         System.out.println("3. Distribute Status Points");
-        System.out.println("3. Mobs   (View all mobs)" );
-        System.out.println("4. End    (End your game)");
+        System.out.println("4. Mobs   (View all mobs)" );
+        System.out.println("5. End    (End your game)");
     }
 
     public void decider() {
         int choice = scan.nextInt();
         scan.nextLine();
         if (choice == 1) {
-            play.battle();
+            battling();
         }
         if (choice == 2) {
             play.printMobStats();
-            System.out.println("Press enter to continue");
-            String temp = scan.nextLine();
+            cont();
         }
+        if (choice == 3) {
+            statsDistribute();
+        }
+    }
+
+    public void battling() {
+        play.battle();
+    }
+
+    public void statsDistribute() {
+        if (play.getPlayer().getStatPoints() > 0) {
+            System.out.println("You have " + play.getPlayer().getStatPoints() + " stat points. Which stats would you like in increase? :");
+            statsDistributeHelp();
+            int statIncrease = scan.nextInt();
+            scan.nextLine();
+            boolean valid = play.getPlayer().statIncrease(statIncrease);
+            while (valid) {
+                statsDistributeHelp();
+                System.out.println("Choose a valid stat to increase (1 - 5):");
+                statIncrease = scan.nextInt();
+                scan.nextLine();
+                valid = play.getPlayer().statIncrease(statIncrease);
+            }
+            System.out.println("Your stat has been increase!!. Check your stats in the menu");
+            cont();
+        } else {
+            System.out.println("You don't have any stat points :(");
+        }
+    }
+    public void statsDistributeHelp() {
+        System.out.println("1. Hit Points (HP)");
+        System.out.println("2. Mana Points (MP)");
+        System.out.println("3. Defense");
+        System.out.println("4. Speed");
+        System.out.println("5. Attack Damage");
+    }
+
+    // Method so i don't have to use the same thing over and over again
+    // stops the program and makes user press enter, so they have time to read.
+    public void cont() {
+        System.out.println("Press enter to continue");
+        String temp = scan.nextLine();
     }
 }

@@ -10,6 +10,7 @@ public class MobBattles {
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
     /** Creation of the player class for the user to initiate */
     private Player player;
+    Player player2;
 
     // The list of Mobs // Name|HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
     /** A String array that stores all the mobs and their stats */
@@ -35,6 +36,9 @@ public class MobBattles {
     }
 
     // Getters / Setters
+    public Player getPlayer() {
+        return player;
+    }
 
     /**
      *
@@ -55,16 +59,15 @@ public class MobBattles {
 
     /** starts the battle with another player (ai) */
     public void battle() {
-        String battler = people[(int) (Math.random() * people.length)] ;
-        int mobNum = (int) (Math.random() * mobs.length);
-        Player player2 = new Player(mobs[mobNum], moves[mobNum], 0);
+        opponentSetUp((int) (Math.random() * mobs.length), people[(int) (Math.random() * people.length)]);
         int tempHp = player.getHp();
+        int tempMp = player.getMp();
         System.out.println("You have entered the battle arena!");
-        System.out.println("You will be facing " + battler + "!");
-        System.out.println(battler + "'s mob is a " + player2.getmN());
+        System.out.println("You will be facing " + player2.getOppName() + "!");
+        System.out.println(player2.getOppName() + "'s mob is a " + player2.getmN());
         int roundNum = 1;
         while (tempHp > 0 && player2.getHp() > 0) {
-
+            battleMenu(tempHp, tempMp, player);
             // Maybe add board design
             System.out.println("These are your moves");
             battleMenu();
@@ -72,7 +75,19 @@ public class MobBattles {
             break;
         }
     }
+    public void opponentSetUp(int mobNum, String name) {
+        player2 = new Player(mobs[mobNum], moves[mobNum], name);
+    }
+    public void battleMenu(int hp, int mp, Player player) {
+        System.out.println("﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎");
 
+        for (int i = 1; i <= 18 - (player.getHp() - hp); i++) {
+            System.out.print("|");
+        }
+        System.out.println();
+        System.out.println("﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊");
+        System.out.println(mp + "/" + player.getMp());
+    }
     /** Prints the movies for the user's mobs so they can battle */
     public void battleMenu() {
         String[][] moves = player.getMoves();
@@ -144,7 +159,7 @@ public class MobBattles {
      * @return returns the damage dealt overtime
      */
     public int gradual() {
-        return 0;
+        return (10 * (1 + (player.getAd() / 120)));
     }
 
     // Damage Taken
