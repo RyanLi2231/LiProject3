@@ -25,7 +25,10 @@ public class MobBattles {
     public MobBattles(int mobNum) {
         player = new Player(mobs[mobNum - 1], moves[mobNum - 1]);
     }
-    /** Sets up the player object and allocates the stats and moves for the mob in the case that the user wants a random mob */
+    /** Sets up the player object and allocates the stats and moves for the mob in the case that the user wants a random mob
+    *
+    * @param mobNum the mob that will be selected based on the user's input
+    */
     public MobBattles() {
         int mobNum =  (int) (Math.random() * mobs.length) - 1;
         player = new Player(mobs[mobNum], moves[mobNum]);
@@ -89,7 +92,7 @@ public class MobBattles {
     }
 
     /**
-     * Prints the Hp & mp of the user's mob & the opponent's mob
+     * Prints the Hp and mp of the user's mob and the opponent's mob
      * @param currentHP the current hp of the user's mob
      * @param currentHP2 the current hp of the opponent's mob
      * @param currentMP the current mp of the user's mob
