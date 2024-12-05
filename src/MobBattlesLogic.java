@@ -54,7 +54,18 @@ public class MobBattlesLogic {
     }
 
     public void battling() {
+        int roundNum = 1;
+        int tempHp = play.getPlayer().getHp();
+        int tempMp = play.getPlayer().getMp();
         play.battle();
+        while (tempHp > 0 && play.getPlayer2().getHp() > 0) {
+            play.battleMenu(tempHp, tempMp, play.getPlayer());
+            play.battleMenu();
+            cont();
+
+            // Continue
+            roundNum++;
+        }
     }
 
     public void statsDistribute() {

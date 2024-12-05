@@ -22,14 +22,14 @@ public class MobBattles {
     /** The list of people you can possibly encounter when battling */
     private String[] people = {"Sam", "Tom", "Timmy", "Jill", "Max", "Toby", "Samantha", "Jerry", "Sally", "Mary", "Luke", "Brock", "Jake"};
 
-    /** Sets up the player object and allocates the stats and moves for the mob */
+    /** Sets up the player object and allocates the stats and moves for the mob
+     *
+     * @param mobNum the mob that will be selected based on the user's input
+     */
     public MobBattles(int mobNum) {
         player = new Player(mobs[mobNum - 1], moves[mobNum - 1]);
     }
-    /** Sets up the player object and allocates the stats and moves for the mob in the case that the user wants a random mob
-    *
-    * @param mobNum the mob that will be selected based on the user's input
-    */
+    /** Sets up the player object and allocates the stats and moves for the mob in the case that the user wants a random mob */
     public MobBattles() {
         int mobNum =  (int) (Math.random() * mobs.length) - 1;
         player = new Player(mobs[mobNum], moves[mobNum]);
@@ -38,6 +38,9 @@ public class MobBattles {
     // Getters / Setters
     public Player getPlayer() {
         return player;
+    }
+    public Player getPlayer2() {
+        return player2;
     }
 
     /**
@@ -60,20 +63,9 @@ public class MobBattles {
     /** starts the battle with another player (ai) */
     public void battle() {
         opponentSetUp((int) (Math.random() * mobs.length), people[(int) (Math.random() * people.length)]);
-        int tempHp = player.getHp();
-        int tempMp = player.getMp();
         System.out.println("You have entered the battle arena!");
         System.out.println("You will be facing " + player2.getOppName() + "!");
         System.out.println(player2.getOppName() + "'s mob is a " + player2.getmN());
-        int roundNum = 1;
-        while (tempHp > 0 && player2.getHp() > 0) {
-            battleMenu(tempHp, tempMp, player);
-            // Maybe add board design
-            System.out.println("These are your moves");
-            battleMenu();
-            roundNum++;
-            break;
-        }
     }
     public void opponentSetUp(int mobNum, String name) {
         player2 = new Player(mobs[mobNum], moves[mobNum], name);
