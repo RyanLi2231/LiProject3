@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MobBattlesLogic {
     private Scanner scan = new Scanner(System.in);
     private boolean repeat = true;
-    private MobBattles infoObj = new MobBattles(1);
+    private MobBattles infoObj = new MobBattles(1, "");
     private MobBattles play;
 
     public MobBattlesLogic() {}
@@ -19,15 +19,21 @@ public class MobBattlesLogic {
     }
 
     public void intro() {
-        System.out.println("Please pick your mob using a number (ex: 1): ");
+        System.out.println("What is your name?");
+        String name = scan.nextLine();
+        System.out.println("Please pick your mob using a number (ex: 1) or type -1 if you want a random mob: ");
         infoObj.printMobNames();
         int mobNum = scan.nextInt();
-        while (mobNum < 1 && mobNum >= infoObj.getMobs().length) {
+        while (mobNum < 1 && mobNum >= infoObj.getMobs().length && mobNum != -1) {
             scan.nextLine();
             System.out.println("Pick a valid mob");
             mobNum = scan.nextInt();
         }
-        play = new MobBattles(mobNum);
+        if (mobNum == -1) {
+            play = new MobBattles(name);
+        } else {
+            play = new MobBattles(mobNum, name);
+        }
     }
 
     public void mainMenu() {
@@ -55,14 +61,28 @@ public class MobBattlesLogic {
 
     public void battling() {
         int roundNum = 1;
-        int tempHp = play.getPlayer().getHp();
-        int tempMp = play.getPlayer().getMp();
-        play.battle();
-        while (tempHp > 0 && play.getPlayer2().getHp() > 0) {
-            play.battleMenu(tempHp, tempMp, play.getPlayer());
-            play.battleMenu();
+        Player player1 = play.getPlayer();
+        Player player2 = play.getPlayer2();
+        int p1Hp = player1.getHp();
+        int p1Mp = player1.getMp();
+        int p2Hp = player2.getHp();
+        int p2Mp = player2.getMp();
+        while (p1Hp > 0 && p2Hp > 0) {
+            play.battle();
+            play.battleMenu(p1Hp, p1Mp, player1);
+            play.battleMenu(p2Hp, p2Mp, player2);
             cont();
+            play.battleMenu();
+            System.out.print("Pick an attack to use against your opponent (1 - 4) :");
+            int attkChoice = scan.nextInt();
+            while (!(attkChoice > 0 && attkChoice < 5)) {
+                play.battleMenu();
+                System.out.print("Pick a valid attack! (1 - 4): ");
+                attkChoice = scan.nextInt();
+            }
 
+            System.out.println("You attack your opponent with " + player1.getMoves()[attkChoice - 1][0] + "!");
+            int damage = play.battleHelp(player1, attkChoice);
             // Continue
             roundNum++;
         }
@@ -92,8 +112,7 @@ public class MobBattlesLogic {
         System.out.println("1. Hit Points (HP)");
         System.out.println("2. Mana Points (MP)");
         System.out.println("3. Defense");
-        System.out.println("4. Speed");
-        System.out.println("5. Attack Damage");
+        System.out.println("4. Attack Damage");
     }
 
     // Method so i don't have to use the same thing over and over again

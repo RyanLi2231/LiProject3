@@ -2,13 +2,13 @@ public class Player {
     // oppName = opponent Name, for opponents only
     // Variables for the Mobs // mN = Mob Name | hp = Hit Points |
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
-    private String oppName;
+    private boolean opp = false;
+    private String Name;
     private String mN;
     private int lvl = 1;
     private int hp;
     private int mp;
     private int df;
-    private int sd;
     private int ad;
     private int exp;
     // Max Exp increases exponentially
@@ -21,27 +21,28 @@ public class Player {
         hp = Integer.parseInt(mob[1]);
         mp = Integer.parseInt(mob[2]);
         df = Integer.parseInt(mob[3]);
-        sd = Integer.parseInt(mob[4]);
-        ad = Integer.parseInt(mob[5]);
+        ad = Integer.parseInt(mob[4]);
         this.moves = moves;
     }
 
     // For creating the opponent /the int opp isn't used
     public Player(String[] mob, String[][] moves, String opponentName) {
-        oppName = opponentName;
+        Name = opponentName;
         mN = mob[0];
         hp = Integer.parseInt(mob[1]);
         mp = Integer.parseInt(mob[2]);
         df = Integer.parseInt(mob[3]);
-        sd = Integer.parseInt(mob[4]);
-        ad = Integer.parseInt(mob[5]);
+        ad = Integer.parseInt(mob[4]);
         this.moves = moves;
+        opp = true;
     }
 
     // Get Methods
-
-    public String getOppName() {
-        return oppName;
+    public boolean isOpp() {
+        return opp;
+    }
+    public String getName() {
+        return Name;
     }
     public String getmN() {
         return mN;
@@ -58,9 +59,6 @@ public class Player {
     public int getDf() {
         return df;
     }
-    public int getSd() {
-        return sd;
-    }
     public int getAd() {
         return ad;
     }
@@ -72,7 +70,9 @@ public class Player {
         return moves;
     }
     // Set Method
-
+    public void setName(String name) {
+        Name = name;
+    }
     public void setStatPoints(int statPoints) {
         this.statPoints = statPoints;
     }
@@ -92,10 +92,6 @@ public class Player {
             statPoints--;
             return false;
         } else if (stat == 4) {
-            sd += 10;
-            statPoints--;
-            return false;
-        } else if (stat == 5) {
             ad += 2;
             statPoints--;
             return false;
@@ -103,7 +99,7 @@ public class Player {
         return true;
     }
     // This is for the opponent
-    public void statIncrease() {
+    public void statIncrease(Player player) {
 
     }
 }
