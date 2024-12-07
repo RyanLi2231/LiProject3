@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MobBattlesLogic {
@@ -69,7 +68,6 @@ public class MobBattlesLogic {
     }
 
     public void battling() {
-        int roundNum = 1;
         play.battle();
         Player player1 = play.getPlayer();
         Player player2 = play.getPlayer2();
@@ -138,7 +136,6 @@ public class MobBattlesLogic {
             }
             // Continue
             cont();
-            roundNum++;
         }
     }
 

@@ -2,7 +2,6 @@ public class Player {
     // oppName = opponent Name, for opponents only
     // Variables for the Mobs // mN = Mob Name | hp = Hit Points |
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
-    private boolean opp = false;
     private String Name;
     private String mN;
     private int lvl = 1;
@@ -34,14 +33,9 @@ public class Player {
         df = Integer.parseInt(mob[3]);
         ad = Integer.parseInt(mob[4]);
         this.moves = moves;
-        opp = true;
         lvl = level;
     }
 
-    // Get Methods
-    public boolean isOpp() {
-        return opp;
-    }
     public String getName() {
         return Name;
     }
@@ -79,9 +73,6 @@ public class Player {
     // Set Method
     public void setName(String name) {
         Name = name;
-    }
-    public void setStatPoints(int statPoints) {
-        this.statPoints = statPoints;
     }
     public void setExp(int exp) {
         this.exp += exp;

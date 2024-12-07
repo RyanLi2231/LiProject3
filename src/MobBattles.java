@@ -111,7 +111,6 @@ public class MobBattles {
     }
     public int battleHelp(Player player, Player player2, int attkChoice) {
         String attkChoice2 = player.getMoves()[attkChoice - 1][2];
-        String attkMpCost = player.getMoves()[attkChoice - 1][1];
         int damage;
 
         if (attkChoice2.equals("single")) {
@@ -130,17 +129,6 @@ public class MobBattles {
             return -1;
         }
         return 0;
-    }
-
-    /**
-     * Prints the Hp and mp of the user's mob and the opponent's mob
-     * @param currentHP the current hp of the user's mob
-     * @param currentHP2 the current hp of the opponent's mob
-     * @param currentMP the current mp of the user's mob
-     * @param currentMP2 the current mp of the opponent's mob
-     */
-    public void battleTable(int currentHP, int currentMP, int currentHP2, int currentMP2) {
-        System.out.println("");
     }
 
     /** Prints the user's mob's stats */
@@ -199,7 +187,7 @@ public class MobBattles {
      * @return returns the damage taken
      */
     public int damageTaken(int damage, Player player) {
-        int trueDamage = (int) (damage - (player.getDf() / 5));
+        int trueDamage = (int) (damage - ((double) player.getDf() / 5));
         if (trueDamage < 0) {
             return 0;
         } else {
