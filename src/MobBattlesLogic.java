@@ -61,6 +61,7 @@ public class MobBattlesLogic {
 
     public void battling() {
         int roundNum = 1;
+        play.battle();
         Player player1 = play.getPlayer();
         Player player2 = play.getPlayer2();
         int p1Hp = player1.getHp();
@@ -68,7 +69,6 @@ public class MobBattlesLogic {
         int p2Hp = player2.getHp();
         int p2Mp = player2.getMp();
         while (p1Hp > 0 && p2Hp > 0) {
-            play.battle();
             play.battleMenu(p1Hp, p1Mp, player1);
             play.battleMenu(p2Hp, p2Mp, player2);
             cont();
@@ -80,10 +80,30 @@ public class MobBattlesLogic {
                 System.out.print("Pick a valid attack! (1 - 4): ");
                 attkChoice = scan.nextInt();
             }
+            while (Integer.parseInt(player1.getMoves()[attkChoice - 1][1]) > p1Mp) {
+                System.out.println("Not enough mana! Use MEDITATE to regain mana! :(");
+                play.battleMenu();
+                attkChoice = scan.nextInt();
+                while (!(attkChoice > 0 && attkChoice < 5)) {
+                    play.battleMenu();
+                    System.out.print("Pick a valid attack! (1 - 4): ");
+                    attkChoice = scan.nextInt();
+                }
+            }
+            if (attkChoice == 4) {
 
+            }
             System.out.println("You attack your opponent with " + player1.getMoves()[attkChoice - 1][0] + "!");
             int damage = play.battleHelp(player1, attkChoice);
+            p2Hp -= damage;
+            p1Mp -= Integer.parseInt(player1.getMoves()[attkChoice - 1][1]);
+            int rand = (int) (Math.random() * 3 + 1);
+            System.out.println(player2.getName() + " attacks with " + player2.getMoves()[rand - 1][0] + "!");
+            damage = play.battleHelp(player2, rand);
+            p1Hp -= damage;
             // Continue
+            scan.nextLine();
+            cont();
             roundNum++;
         }
     }

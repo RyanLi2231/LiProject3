@@ -10,14 +10,14 @@ public class MobBattles {
     // mp = Magic Points | df = Defense | sd = Speed | ad = Attack Bonus
     /** Creation of the player class for the user to initiate */
     private Player player;
-    Player player2;
+    private Player player2;
 
     // The list of Mobs // Name|HP|MP (Maybe)|DEFENSE|SPEED|ATTACK Damage/BONUS (help simplify the attacks)
     /** A String array that stores all the mobs and their stats */
     private String[][] mobs = {{"Zombie", "100", "200", "20", "2"}};
     // List of moves // Name | MP cost | attack type /| accuracy Down
     /** A multidimensional String array that stores the list of moves for each mob */
-    private String[][][] moves = {{{"Strike", "0", "single"}, {"Spit", "20", "gradual"}, {"Lunge", "50", "heavy"}, {"Meditate", "0", "mpIncrease"}}};
+    private String[][][] moves = {{{"Strike", "20", "single"}, {"Spit", "20", "multi"}, {"Lunge", "50", "heavy"}, {"Meditate", "0", "mpIncrease"}}};
     // List of People you can encounter
     /** The list of people you can possibly encounter when battling */
     private String[] people = {"Sam", "Tom", "Timmy", "Jill", "Max", "Toby", "Samantha", "Jerry", "Sally", "Mary", "Luke", "Brock", "Jake"};
@@ -72,12 +72,12 @@ public class MobBattles {
     public void opponentSetUp(int mobNum, String name) {
         player2 = new Player(mobs[mobNum], moves[mobNum], name);
     }
+
     public void battleMenu(int hp, int mp, Player player) {
         System.out.println();
         System.out.println(player.getName() + ": " + player.getmN());
         System.out.println("﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎");
-
-        for (int i = 1; i <= 18 - (player.getHp() - hp); i++) {
+        for (int i = 1; i <= (int) (18 * ((double) hp / player.getHp())); i++) {
             System.out.print("|");
         }
         System.out.println();
@@ -108,14 +108,20 @@ public class MobBattles {
 
         if (attkChoice2.equals("single")) {
             damage = damageTaken(single(player), player);
-            System.out.println(player.getName() + " has dealt " + damage + " damage ");
+            System.out.println(player.getName() + "'s " + player.getmN() + " has dealt " + damage + " damage ");
+            return damage;
         } else if (attkChoice2.equals("heavy")) {
-
-        } else if (attkChoice2.equals("gradual")) {
-
+            damage = damageTaken(heavy(player), player);
+            System.out.println(player.getName() + "'s " + player.getmN() + " has dealt " + damage + " damage ");
+            return damage;
+        } else if (attkChoice2.equals("multi")) {
+            damage = damageTaken(multi(player), player);
+            System.out.println(player.getName() + "'s " + player.getmN() + " has dealt " + damage + " damage ");
+            return damage;
         } else if (attkChoice2.equals("mpIncrease")) {
-
+            return -1;
         }
+        return 0;
     }
 
     /**
@@ -155,21 +161,23 @@ public class MobBattles {
      * @return returns the damage dealt
      */
     public int single(Player player) {
-        return 20 * (1 + (player.getAd() / 100));
+        return (int) (20 * (1 + ((double) player.getAd() / 100)));
     }
     /**
      * Deals heavy damage to the opposer
      * @return returns the damage dealt
      */
     public int heavy(Player player) {
-        return 20 * (1 + (player.getAd() / 10));
+        return (int) (20 * (1 + (player.getAd() / 10.0)));
     }
     /**
      * Deals damage overtime
      * @return returns the damage dealt overtime
      */
-    public int gradual(Player player) {
-        return (10 * (1 + (player.getAd() / 120)));
+    public int multi(Player player) {
+        int rand = (int) (Math.random() * 5 + 1);
+        System.out.println(player.getName() + "'s " + player.getmN() + " hits " + rand + " times!");
+        return rand * (int) (6 * (1 + ((double) player.getAd() / 50)));
     }
     public int mpIncrease() {
         return 100;
