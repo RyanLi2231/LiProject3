@@ -14,7 +14,7 @@ public class Player {
     // Max Exp increases exponentially
     private int maxExp = 20;
     private String[][] moves;
-    private int statPoints = 1;
+    private int statPoints = 0;
 
     public Player(String[] mob, String[][] moves) {
         mN = mob[0];
@@ -26,7 +26,7 @@ public class Player {
     }
 
     // For creating the opponent /the int opp isn't used
-    public Player(String[] mob, String[][] moves, String opponentName) {
+    public Player(String[] mob, String[][] moves, String opponentName, int level) {
         Name = opponentName;
         mN = mob[0];
         hp = Integer.parseInt(mob[1]);
@@ -35,6 +35,7 @@ public class Player {
         ad = Integer.parseInt(mob[4]);
         this.moves = moves;
         opp = true;
+        lvl = level;
     }
 
     // Get Methods
@@ -65,6 +66,12 @@ public class Player {
     public int getStatPoints() {
         return statPoints;
     }
+    public int getExp() {
+        return exp;
+    }
+    public int getMaxExp() {
+        return maxExp;
+    }
 
     public String[][] getMoves() {
         return moves;
@@ -76,30 +83,61 @@ public class Player {
     public void setStatPoints(int statPoints) {
         this.statPoints = statPoints;
     }
+    public void setExp(int exp) {
+        this.exp += exp;
+    }
+
+    // Method for leveling up
+    public int levelUp() {
+        int levelIncrease = 0;
+        while (exp >= maxExp) {
+            exp -= maxExp;
+            maxExp = (int) (maxExp * 1.2);
+            lvl++;
+            levelIncrease++;
+            statPoints++;
+            System.out.println("You have leveled up!");
+        }
+        return levelIncrease;
+    }
 
     // Methods to increase stats based off levels
     public boolean statIncrease(int stat) {
         if (stat == 1) {
-            hp += 20;
+            hp += 10;
             statPoints--;
             return false;
         } else if (stat == 2) {
-            mp += 20;
+            mp += 10;
             statPoints--;
             return false;
         } else if (stat == 3) {
-            df += 2;
+            df += 4;
             statPoints--;
             return false;
         } else if (stat == 4) {
-            ad += 2;
+            ad += 3;
             statPoints--;
             return false;
         }
         return true;
     }
     // This is for the opponent
-    public void statIncrease(Player player) {
-
+    public void statIncrease(String points) {
+        int pts = Integer.parseInt(points);
+        int rand;
+        while (pts > 0) {
+            rand = (int) (Math.random() * 3) + 1;
+            if (rand == 1) {
+                hp += 10;
+                pts--;
+            } else if (rand == 2) {
+                ad += 3;
+                pts--;
+            } else if (rand == 3) {
+                df += 4;
+                pts--;
+            }
+        }
     }
 }
