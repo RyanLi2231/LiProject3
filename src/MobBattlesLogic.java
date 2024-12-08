@@ -25,9 +25,10 @@ public class MobBattlesLogic {
         System.out.println("[Name, HP, MP, DF, AD (attack damage)]");
         infoObj.printMobNames();
         int mobNum = scan.nextInt();
-        while (mobNum != -1 && mobNum < 1 && mobNum >= infoObj.getMobs().length) {
+        while (mobNum != -1 && (mobNum < 1 || mobNum > infoObj.getMobs().length)) {
             scan.nextLine();
-            System.out.println("Pick a valid mob");
+            infoObj.printMobNames();
+            System.out.print("Pick a valid mob or type -1 for a random one :");
             mobNum = scan.nextInt();
         }
         if (mobNum == -1) {
@@ -43,6 +44,7 @@ public class MobBattlesLogic {
         System.out.println("3. Distribute Stat(us) Points");
         System.out.println("4. Mobs   (View all mobs)" );
         System.out.println("5. End    (End your game)");
+        System.out.print("Use numbers to choose your action: ");
     }
 
     public void decider() {
@@ -141,7 +143,7 @@ public class MobBattlesLogic {
 
     public void statsDistribute() {
         if (play.getPlayer().getStatPoints() > 0) {
-            System.out.println("You have " + play.getPlayer().getStatPoints() + " stat points. Which stats would you like in increase? :");
+            System.out.println("You have " + play.getPlayer().getStatPoints() + " stat points. Which stat would you like to increase? :");
             statsDistributeHelp();
             int statIncrease = scan.nextInt();
             scan.nextLine();

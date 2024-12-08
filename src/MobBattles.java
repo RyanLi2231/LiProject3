@@ -14,7 +14,11 @@ public class MobBattles {
 
     // The list of Mobs // Name|HP|MP (Maybe)|DEFENSE|ATTACK Damage/BONUS (help simplify the attacks)
     /** A String array that stores all the mobs and their stats */
-    private String[][] mobs = {{"Zombie", "100", "200", "20", "6"}, {"Golem", "140", "100", "30", "2"}, {"Goblin", "80", "200", "10", "12"}, {"Orc", "200", "50", "0", "16"}};
+    private String[][] mobs = {
+            {"Zombie", "100", "200", "20", "6"},
+            {"Golem", "140", "100", "30", "2"},
+            {"Goblin", "80", "200", "10", "12"},
+            {"Orc", "200", "50", "0", "16"}};
     // List of moves // Name | MP cost | attack type
     /** A multidimensional String array that stores the list of moves for each mob */
     private String[][][] moves = {
@@ -83,16 +87,15 @@ public class MobBattles {
     public void battleMenu(int hp, int mp, Player player) {
         System.out.println();
         System.out.println(player.getName() + ": " + player.getmN());
-        System.out.println(hp); // Temporary!!
         System.out.println("﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎﹎");
         for (int i = 1; i <= (int) (18 * ((double) hp / player.getHp())); i++) {
             System.out.print("|");
         }
         System.out.println();
         System.out.println("﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊");
-        System.out.println(mp + "/" + player.getMp());
+        System.out.println(mp + "\\" + player.getMp());
     }
-    /** Prints the movies for the user's mobs so they can battle */
+    /** Prints the moves for the user's mobs so they can battle */
     public void battleMenu() {
         String[][] moves = player.getMoves();
         for (int i = 0; i < moves.length; i++) {
@@ -109,6 +112,7 @@ public class MobBattles {
 
         }
     }
+    // Decides which move is used depending on the user's input
     public int battleHelp(Player player, Player player2, int attkChoice) {
         String attkChoice2 = player.getMoves()[attkChoice - 1][2];
         int damage;
@@ -133,7 +137,14 @@ public class MobBattles {
 
     /** Prints the user's mob's stats */
     public void printMobStats() {
-        String[] statNames = {"Level: " + player.getLvl(), "Hp: " + player.getHp(), "Mp: " + player.getMp(), "Defense: " + player.getDf(), "Attack: " + player.getAd(), "EXP: " + player.getExp(), "Free Stat Points: " + player.getStatPoints()};
+        String[] statNames = {
+                "Level: " + player.getLvl(),
+                "Hp: " + player.getHp(),
+                "Mp: " + player.getMp(),
+                "Defense: " + player.getDf(),
+                "Attack: " + player.getAd(),
+                "EXP: " + player.getExp(),
+                "Free Stat Points: " + player.getStatPoints()};
         System.out.println(player.getmN());
         for (int i = 0; i < statNames.length; i++) {
             int count = 20;
@@ -174,7 +185,7 @@ public class MobBattles {
     public int multi(Player player) {
         int rand = (int) (Math.random() * 5 + 1);
         System.out.println(player.getName() + "'s " + player.getmN() + " hits " + rand + " times!");
-        return rand * (int) (9 * (1 + ((double) player.getAd() / 50)));
+        return rand * (int) (7 * (1 + ((double) player.getAd() / 50)));
     }
     public int mpIncrease() {
         return 100;
